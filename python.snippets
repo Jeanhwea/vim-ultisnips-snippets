@@ -429,6 +429,22 @@ snippet from "from module import name" b
 from ${1:module} import ${2:Stuff}
 endsnippet
 
+snippet slfm "define member method" b
+def ${1:method_name}(self${2}):
+	${3:pass # TODO: coding...}
+endsnippet
+
+snippet clsm "define class method" b
+@classmethod
+def ${1:class_method_name}(cls${2}):
+	${3:pass # TODO: coding}
+endsnippet
+
+snippet stam "define static method" b
+@staticmethod
+def ${1:static_method_name}(${2}):
+	${3:pass # TODO: coding}
+endsnippet
 
 ##############
 # PROPERTIES #
