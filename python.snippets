@@ -429,21 +429,44 @@ snippet from "from module import name" b
 from ${1:module} import ${2:Stuff}
 endsnippet
 
-snippet slfm "define member method" b
-def ${1:method_name}(self${2}):
-	${3:pass # TODO: coding...}
-endsnippet
-
-snippet clsm "define class method" b
+snippet defc "define class method with docstrings" b
 @classmethod
-def ${1:class_method_name}(cls${2}):
-	${3:pass # TODO: coding}
+def ${1:class_method_name}(`!p
+if snip.indent:
+	snip.rv = 'cls' + (", " if len(t[2]) else "")`${2:arg1}):
+	`!p snip.rv = triple_quotes(snip)`${4:@todo: Docstring for $1.}`!p
+snip.rv = ""
+snip >> 1
+
+args = get_args(t[2])
+if args:
+	write_docstring_args(args, snip)
+
+style = get_style(snip)
+snip += format_return(style)
+snip.rv += '\n' + snip.mkline('', indent='')
+snip += triple_quotes(snip) `
+	${0:pass}
 endsnippet
 
-snippet stam "define static method" b
+snippet defs "define static method with docstrings" b
 @staticmethod
-def ${1:static_method_name}(${2}):
-	${3:pass # TODO: coding}
+def ${1:static_method_name}(`!p
+if snip.indent:
+	snip.rv = ("")`${2:arg1}):
+	`!p snip.rv = triple_quotes(snip)`${4:@todo: Docstring for $1.}`!p
+snip.rv = ""
+snip >> 1
+
+args = get_args(t[2])
+if args:
+	write_docstring_args(args, snip)
+
+style = get_style(snip)
+snip += format_return(style)
+snip.rv += '\n' + snip.mkline('', indent='')
+snip += triple_quotes(snip) `
+	${0:pass}
 endsnippet
 
 ##############
