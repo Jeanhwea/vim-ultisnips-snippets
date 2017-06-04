@@ -604,7 +604,6 @@ snippet ar "Assert raises" b
 self.assertRaises(${1:exception}, ${2:func}${3/.+/, /}${3:arguments})
 endsnippet
 
-
 snippet testcase "pyunit testcase" b
 class Test${1:Class}(${2:unittest.TestCase}):
 
@@ -618,6 +617,14 @@ class Test${1:Class}(${2:unittest.TestCase}):
 
 	def test_${6:name}(self):
 		${7:pass}
+endsnippet
+
+snippet ye "yapf enable guard" b
+# yapf: enable
+endsnippet
+
+snippet yd "yapf disable guard" b
+# yapf: disable
 endsnippet
 
 # vim:ft=snippets:
