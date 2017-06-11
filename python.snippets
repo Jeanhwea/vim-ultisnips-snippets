@@ -157,6 +157,13 @@ def write_init_body(args, parents, snip):
 	for arg in args:
 		snip += "self._%s = %s" % (arg, arg)
 
+def write_init_body2(args, classname, snip):
+
+	snip += "super(" + classname + ", self).__init__()"
+
+	for arg in args:
+		snip += "self._%s = %s" % (arg, arg)
+
 
 def write_slots_args(args, snip):
 	args = ['"_%s"' % arg for arg in args]
@@ -167,6 +174,29 @@ endglobal
 ########################################
 # Class & Special Method Name Snippets #
 ########################################
+
+snippet cl "class with docstrings using super for initialization" b
+class ${1:MyClass}(${2:object}):
+
+	`!p snip.rv = triple_quotes(snip)`${3:Docstring for $1. }`!p snip.rv = triple_quotes(snip)`
+
+	def __init__(self$4):
+		`!p snip.rv = triple_quotes(snip)`${5:@todo: to be defined1.}`!p
+snip.rv = ""
+snip >> 2
+
+args = get_args(t[4])
+
+write_docstring_args(args, snip)
+if args:
+	snip.rv += '\n' + snip.mkline('', indent='')
+	snip += '{0}'.format(triple_quotes(snip))
+
+write_init_body2(args, t[1], snip)
+`
+		$0
+endsnippet
+
 
 snippet class "class with docstrings" b
 class ${1:MyClass}(${2:object}):
